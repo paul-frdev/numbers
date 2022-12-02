@@ -14,8 +14,8 @@ export const Title = ({ children }: TitleProps) => {
 const styles = StyleSheet.create({
 
   title: {
+    fontFamily: 'open-sans-bold',
     fontSize: 24,
-    fontWeight: "700",
     color: "white",
     textAlign: "center",
     borderWidth: 2,

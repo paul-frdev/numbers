@@ -13,6 +13,7 @@ export const InstructionText = ({ children, style }: InstructionTextProps) => {
 
 const styles = StyleSheet.create({
   instructionText: {
+    fontFamily: 'open-sans',
     color: colors.yellow,
     fontSize: 24,
   }

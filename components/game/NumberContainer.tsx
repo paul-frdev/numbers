@@ -26,6 +26,6 @@ const styles = StyleSheet.create({
   textInput: {
     color: colors.yellow,
     fontSize: 36,
-    fontWeight: "700"
+    fontFamily: 'open-sans-bold'
   }
 })
