@@ -1,20 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from 'react';
+import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
+import { colors } from './constants/colors';
+import { GameScreen } from './screens/GameScreen';
+import { StartScreenGame } from './screens/StartScreenGame';
+import { GameOverScreen } from './screens/GameOverScreen';
 
 export default function App() {
+  const [userNumber, setUserNumber] = useState('');
+  const [gameIsOver, setGameIsOver] = useState(true);
+
+  const pickedNumberHandler = (pickedNumber: string) => {
+    setUserNumber(pickedNumber);
+    setGameIsOver(false);
+  }
+  const gameOverHandler = () => {
+    setGameIsOver(true);
+  }
+
+  let screen = <StartScreenGame onPickedNumber={pickedNumberHandler} />
+  if (userNumber) {
+    screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler}/>
+  }
+  if (gameIsOver && userNumber) {
+    screen = <GameOverScreen />
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LinearGradient
+      colors={[colors.primary700, colors.yellow]}
+      style={styles.rootScreen}
+    >
+      <ImageBackground
+        source={require("./assets/images/cubs.png")}
+        resizeMode="cover"
+        style={styles.rootScreen}
+        imageStyle={styles.backgroundImage}
+      >
+        <SafeAreaView style={styles.rootScreen}>
+          {screen}
+        </SafeAreaView>
+      </ImageBackground>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  rootScreen: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  backgroundImage: {
+    opacity: 0.15,
+  }
 });
